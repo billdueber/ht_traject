@@ -2,9 +2,10 @@ require 'traject'
 require 'match_map'
 require 'ht_traject/ht_constants'
 
-unless ENV['SKIP_PH']
-  require 'ht_traject/ht_print_holdings'
-end
+#unless ENV['SKIP_PH']
+#  STDERR.puts "Did not skip_ph"
+#  require 'ht_traject/ht_print_holdings'
+#end
 
 require 'ht_traject/ht_macros'
 require 'json'
@@ -113,8 +114,10 @@ module HathiTrust
 
 
       PH = if ENV['HT_TRAJECT_MOCK_PH']
+             require_relative 'ht_mock_print_holdings'
              HathiTrust::MockPrintHoldings
            else
+             require_relative 'ht_print_holdings'             
              HathiTrust::PrintHoldings
            end
 
